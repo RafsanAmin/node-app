@@ -1,11 +1,12 @@
-var http = require("http");
-var fs = require("fs");
-var url = require("url");
+const http = require("http");
+const port = process.env.PORT || 3000;
 
-const { report } = require("process");
-
-var server = http.createServer((req, res) => {
-  res.end("<h1>Hehe Boi!</h1>");
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/html");
+  res.end("<h1>Hello World</h1>");
 });
 
-server.listen();
+server.listen(port, () => {
+  console.log(`Server running at port ` + port);
+});
