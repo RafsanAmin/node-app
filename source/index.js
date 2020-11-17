@@ -8,6 +8,4 @@ var server = http.createServer((req, res) => {
   res.end("<h1>Hehe Boi!</h1>");
 });
 
-server.listen(2030, () => {
-  console.log("Server started successfully!");
-});
+server.listen();
