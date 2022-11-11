@@ -8,21 +8,21 @@ const port = process.env.PORT || 4000;
 const app = express();
 
 app.use('/todos', express.static(__dirname + '/public'));
-// mongoose
-//   .connect(
-//     'mongodb+srv://RafsanDB:S91CgoOUASdVh2x4@cluster0.8nke7.mongodb.net/MyDB?retryWrites=true&w=majority',
-//     {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//       useFindAndModify: false,
-//     }
-//   )
-//   .then(() => {
-//     console.log('Connected');
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+mongoose
+  .connect(
+    'mongodb+srv://RafsanDB:S91CgoOUASdVh2x4@cluster0.8nke7.mongodb.net/MyDB?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => {
+    console.log('Connected');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.use(
   cors({
