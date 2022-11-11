@@ -1,0 +1,102 @@
+* {
+  font-family: Jost;
+}
+body {
+  position: relative;
+  background-image: url("../img/bg.svg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.form_con {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.form {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  width: 95vw;
+  max-width: 400px;
+  overflow: hidden;
+  box-shadow: 0px 0px 23px 3px rgba(1, 128, 212, 0.192);
+  padding: 2rem 2rem;
+  background-color: white;
+  border-radius: 10px;
+  transform: scale(1.1);
+}
+h1 {
+  color: #2490fc;
+  margin: 1rem 0;
+}
+.forma {
+  margin: 1rem 0rem;
+  position: relative;
+}
+
+.forma input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #2990f8;
+  border-radius: 0;
+  transition: 0.15s ease;
+  padding-bottom: 0.5rem;
+}
+.forma input:focus {
+  outline: none;
+  border-bottom: 3px solid #2990f8;
+}
+.forma input::placeholder {
+  color: #b4d9ff;
+}
+.forma label {
+  position: absolute;
+  left: 0;
+  transition: 0.5s;
+  color: #b4d9ff;
+  pointer-events: none;
+}
+.con {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0rem 1rem;
+}
+.con button {
+  background-color: #2990f8;
+  border: 0;
+  color: #fff;
+  transition: 0.3s linear;
+  border-radius: 5px;
+  width: min(100px, 50%);
+  padding: 0.35rem 0rem;
+}
+.con button:hover {
+  background-color: #1271cf;
+}
+.con button:active {
+  outline: none;
+  box-shadow: 0px 0px 23px 3px rgba(21, 159, 252, 0.705);
+}
+.con button:focus {
+  outline: none;
+  box-shadow: 0px 0px 23px 3px rgba(1, 128, 212, 0.192);
+}
+
+h2 {
+  color: #ff8686;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+@media only screen and (max-width: 1200px) {
+  .form {
+    transform: scale(1);
+  }
+}

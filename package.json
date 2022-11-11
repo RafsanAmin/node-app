@@ -1,0 +1,25 @@
+{
+  "name": "userauthenticationapi",
+  "version": "1.0.0",
+  "description": "A UA API",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.5"    
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server\\index.js"
+  },
+   "engines": {
+        "node": "14.16.0",
+        "npm": "6.14.11"
+  }, 
+  "author": "Rafsan",
+  "license": "ISC"
+}
