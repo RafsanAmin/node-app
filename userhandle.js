@@ -1,42 +1,39 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const userModel = require("./schema/UserSchema");
-const bcr = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const express = require('express');
+const mongoose = require('mongoose');
+const userModel = require('./schema/UserSchema');
+const bcr = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const uhandle = express.Router();
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 
 uhandle.use(cookieParser());
-uhandle.use("/signup", async (req, res, next) => {
-  await userModel.find(
-    { username: req.body.username.toLowerCase() },
-    (err, data) => {
-      if (err) {
-        res.json({ massage: "Add failed", add: false, exists: false });
-      } else if (data.length > 0) {
-        res.json({ massage: "User exists", add: false, exists: true });
-      } else {
-        next();
-      }
-    },
-  );
+uhandle.use('/signup', async (req, res, next) => {
+  await userModel.find({ username: req.body.username.toLowerCase() }, (err, data) => {
+    if (err) {
+      res.json({ massage: 'Add failed', add: false, exists: false });
+    } else if (data.length > 0) {
+      res.json({ massage: 'User exists', add: false, exists: true });
+    } else {
+      next();
+    }
+  });
 });
 
-uhandle.get("/authen", async (req, res) => {
+uhandle.get('/authen', async (req, res) => {
   let cookie = req.cookies.jwt;
   let token;
-  if (cookie == "" || cookie == null || cookie == undefined) {
-    res.json({ auth: false, massage: "User not Logged in" });
+  if (cookie == '' || cookie == null || cookie == undefined) {
+    res.json({ auth: false, massage: 'User not Logged in' });
   } else {
     token = cookie;
-    let authed = jwt.verify(token, "{s{MSX,,EL~8@h3:)4>ynKP~_N]+Go");
+    let authed = jwt.verify(token, process.env.SECRET);
 
     await userModel
       .findOne({ _id: authed.data })
-      .populate("todos")
+      .populate('todos')
       .exec((err, data) => {
         if (err) {
-          res.json({ massage: "Auth Failed", add: false, exists: false });
+          res.json({ massage: 'Auth Failed', add: false, exists: false });
         } else {
           let sent = {
             username: data.username,
@@ -44,7 +41,7 @@ uhandle.get("/authen", async (req, res) => {
             todos: data.todos,
           };
           res.json({
-            massage: "User exists",
+            massage: 'User exists',
             add: false,
             exists: true,
             data: sent,
@@ -53,7 +50,7 @@ uhandle.get("/authen", async (req, res) => {
       });
   }
 });
-uhandle.post("/signup", async (req, res, next) => {
+uhandle.post('/signup', async (req, res, next) => {
   let hPass = await bcr.hash(req.body.password, 10);
   let newUser = {
     username: req.body.username.toLowerCase(),
@@ -64,24 +61,24 @@ uhandle.post("/signup", async (req, res, next) => {
   let x = new userModel(newUser);
   await x.save((err) => {
     if (err) {
-      res.json({ massage: "Add failed", add: false });
+      res.json({ massage: 'Add failed', add: false });
     } else {
-      res.json({ massage: "Added", add: true });
+      res.json({ massage: 'Added', add: true });
     }
   });
 });
-uhandle.delete("/logout", (req, res) => {
-  res.clearCookie("jwt");
+uhandle.delete('/logout', (req, res) => {
+  res.clearCookie('jwt');
   res.json({ done: true });
 });
-uhandle.get("/login", async (req, res) => {
+uhandle.get('/login', async (req, res) => {
   let user = {
     username: req.query.username.toLowerCase(),
   };
   await userModel.findOne(user, async (err, data) => {
     if (err) {
       res.json({
-        massage: "Authentication Failed",
+        massage: 'Authentication Failed',
         done: false,
         exists: false,
       });
@@ -90,19 +87,16 @@ uhandle.get("/login", async (req, res) => {
     } else {
       let passm = await bcr.compare(req.query.password, data.password);
       if (passm) {
-        let scrt = jwt.sign(
-          { data: data.id },
-          "{s{MSX,,EL~8@h3:)4>ynKP~_N]+Go",
-        );
-        res.cookie("jwt", scrt, {
-          sameSite: "lax",
+        let scrt = jwt.sign({ data: data.id }, process.env.SECRET);
+        res.cookie('jwt', scrt, {
+          sameSite: 'lax',
           secure: true,
           maxAge: 900000000,
           httpOnly: true,
         });
-        res.json({ massage: "Login Success", done: true });
+        res.json({ massage: 'Login Success', done: true });
       } else {
-        res.json({ massage: "Password is not correct!", done: false });
+        res.json({ massage: 'Password is not correct!', done: false });
       }
     }
   });

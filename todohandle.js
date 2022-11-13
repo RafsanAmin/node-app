@@ -16,7 +16,7 @@ thandle.use(async (req, res, next) => {
     res.json({ auth: false, massage: 'User not Logged in' });
   } else {
     token = cookie;
-    let authed = jwt.verify(token, '{s{MSX,,EL~8@h3:)4>ynKP~_N]+Go');
+    let authed = jwt.verify(token, process.env.SECRET);
 
     await userModel.findOne({ _id: authed.data }, (err, data) => {
       if (err) {
