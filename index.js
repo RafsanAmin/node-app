@@ -6,17 +6,14 @@ const th = require('./todohandle');
 const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 4000;
 const app = express();
-
+require('dotenv').config({ path: `${__dirname}/.env` });
 app.use('/todos', express.static(__dirname + '/public'));
 mongoose
-  .connect(
-    'mongodb+srv://RafsanDB:S91CgoOUASdVh2x4@cluster0.8nke7.mongodb.net/MyDB?retryWrites=true&w=majority',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log('Connected');
   })
