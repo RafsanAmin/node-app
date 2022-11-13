@@ -7,7 +7,7 @@ function log() {
   };
   $.ajax({
     type: 'GET',
-    url: 'https://rafsanamin.onrender.com/auth/login',
+    url: 'https://rafsanamin.adaptable.app/auth/login',
     data: send,
     xhrFields: {
       withCredentials: true,

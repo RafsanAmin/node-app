@@ -10,7 +10,7 @@ let list_num = 1;
 let checked = false;
 $.ajax({
   type: 'GET',
-  url: 'https://rafsanamin.onrender.com/auth/authen',
+  url: 'https://rafsanamin.adaptable.app/auth/authen',
   xhrFields: {
     withCredentials: true,
   },
@@ -27,7 +27,7 @@ $.ajax({
 function logu() {
   $.ajax({
     type: 'DELETE',
-    url: 'https://rafsanamin.onrender.com/auth/logout',
+    url: 'https://rafsanamin.adaptable.app/auth/logout',
     xhrFields: {
       withCredentials: true,
     },
@@ -50,7 +50,7 @@ function del(elem) {
   elem.hide(300);
   $.ajax({
     type: 'DELETE',
-    url: 'https://rafsanamin.onrender.com/todo/del',
+    url: 'https://rafsanamin.adaptable.app/todo/del',
     contentType: 'application/json',
     data: JSON.stringify(send),
     xhrFields: {
@@ -77,7 +77,7 @@ function check(elem) {
   function update(send) {
     $.ajax({
       type: 'PUT',
-      url: 'https://rafsanamin.onrender.com/todo/check',
+      url: 'https://rafsanamin.adaptable.app/todo/check',
       contentType: 'application/json',
       data: JSON.stringify(send),
       xhrFields: {
@@ -132,7 +132,7 @@ loadAll();
 function loadAll() {
   $.ajax({
     type: 'GET',
-    url: 'https://rafsanamin.onrender.com/todo/alltd',
+    url: 'https://rafsanamin.adaptable.app/todo/alltd',
     xhrFields: {
       withCredentials: true,
     },
@@ -252,7 +252,7 @@ function addTodo(e) {
     });
     $.ajax({
       type: 'POST',
-      url: 'https://rafsanamin.onrender.com/todo/add',
+      url: 'https://rafsanamin.adaptable.app/todo/add',
       contentType: 'application/json',
       data: JSON.stringify(send),
       xhrFields: {

@@ -23,7 +23,7 @@ function su() {
       console.log(send);
       $.ajax({
         type: 'POST',
-        url: 'https://rafsanamin.onrender.com/auth/signup',
+        url: 'https://rafsanamin.adaptable.app/auth/signup',
         contentType: 'application/json',
         data: JSON.stringify(send),
         xhrFields: {
